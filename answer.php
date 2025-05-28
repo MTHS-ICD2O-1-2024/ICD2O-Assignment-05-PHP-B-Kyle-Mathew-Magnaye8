@@ -1,5 +1,7 @@
+<!-- answer.php -->
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
   <meta charset="utf-8" />
@@ -17,8 +19,10 @@
   <title>Reverse a Number, in PHP</title>
 </head>
 
+
 <body>
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
 
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
@@ -27,28 +31,52 @@
       </div>
     </header>
 
+
     <main class="mdl-layout__content">
       <div class="right-image">
         <img src="./images/counting-backwards-to-exercises-worksheet-kids-103205379.webp" alt="Reverse a numbers image" />
       </div>
 
+
       <div class="page-content">
-        <h5>Enter a positive number to reverse:</h5>
 
-        <form action="reverse-answer.php" method="post">
-          <!-- Input Number Field -->
-          <label for="positive-integer-number-1">Number:</label><br />
-          <input type="number" id="positive-integer-number-1" name="positive-integer-number-1" min="1" placeholder="e.g. 123" required />
-          <br /><br />
 
-          <!-- Submit Button -->
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
-            SHOW REVERSED
-          </button>
-        </form>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          $number = $_POST["positive-integer-number-1"];
+
+
+          if (is_numeric($number) && $number > 0) {
+            $original = $number;
+            $reversed = 0;
+
+
+            while ($number > 0) {
+              $digit = $number % 10;
+              $reversed = ($reversed * 10) + $digit;
+              $number = floor($number / 10);
+            }
+
+
+            echo "<h2>Original Number: $original</h2>";
+            echo "<h2>Reversed Number: $reversed</h2>";
+          } else {
+            echo "<h2>Please enter a valid positive number.</h2>";
+          }
+        }
+        ?>
+
+
+
+
+        <br>
+        <a href="index.php" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+          Return
+        </a>
       </div>
     </main>
   </div>
 </body>
+
 
 </html>
